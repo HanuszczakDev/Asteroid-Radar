@@ -1,7 +1,6 @@
-package com.hanuszczak.asteroidradar.api
+package com.hanuszczak.asteroidradar.util
 
-import com.hanuszczak.asteroidradar.Asteroid
-import com.hanuszczak.asteroidradar.Constants
+import com.hanuszczak.asteroidradar.model.data.Asteroid
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*

@@ -1,4 +1,4 @@
-package com.hanuszczak.asteroidradar.main
+package com.hanuszczak.asteroidradar.view.main
 
 import android.os.Bundle
 import android.view.*
@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hanuszczak.asteroidradar.R
 import com.hanuszczak.asteroidradar.databinding.FragmentMainBinding
+import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModel
 
 class MainFragment : Fragment() {
 

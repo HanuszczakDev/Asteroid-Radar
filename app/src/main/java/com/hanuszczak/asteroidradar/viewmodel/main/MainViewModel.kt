@@ -1,4 +1,4 @@
-package com.hanuszczak.asteroidradar.main
+package com.hanuszczak.asteroidradar.viewmodel.main
 
 import androidx.lifecycle.ViewModel
 

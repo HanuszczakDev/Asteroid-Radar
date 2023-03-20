@@ -6,7 +6,7 @@
 
     <fragment
         android:id="@+id/mainFragment"
-        android:name="com.hanuszczak.asteroidradar.main.MainFragment"
+        android:name="com.hanuszczak.asteroidradar.view.main.MainFragment"
         android:label="fragment_main"
         tools:layout="@layout/fragment_main" >
         <action
@@ -16,7 +16,7 @@
 
     <fragment
         android:id="@+id/detailFragment"
-        android:name="com.hanuszczak.asteroidradar.detail.DetailFragment"
+        android:name="com.hanuszczak.asteroidradar.view.detail.DetailFragment"
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail">
 

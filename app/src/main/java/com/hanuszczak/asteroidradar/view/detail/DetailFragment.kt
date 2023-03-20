@@ -1,4 +1,4 @@
-package com.hanuszczak.asteroidradar.detail
+package com.hanuszczak.asteroidradar.view.detail
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.hanuszczak.asteroidradar.R
 import com.hanuszczak.asteroidradar.databinding.FragmentDetailBinding
+import com.hanuszczak.asteroidradar.detail.DetailFragmentArgs
 
 class DetailFragment : Fragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

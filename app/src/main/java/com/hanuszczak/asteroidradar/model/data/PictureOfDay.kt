@@ -1,4 +1,4 @@
-package com.hanuszczak.asteroidradar
+package com.hanuszczak.asteroidradar.model.data
 
 import com.squareup.moshi.Json
 
