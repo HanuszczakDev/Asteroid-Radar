@@ -6,20 +6,26 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hanuszczak.asteroidradar.R
 import com.hanuszczak.asteroidradar.databinding.FragmentMainBinding
+import com.hanuszczak.asteroidradar.model.Db
 import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModel
+import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModelFactory
 
 class MainFragment : Fragment() {
 
-    private val viewModel: MainViewModel by lazy {
-        ViewModelProvider(this).get(MainViewModel::class.java)
-    }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+                              savedInstanceState: Bundle?): View {
         val binding = FragmentMainBinding.inflate(inflater)
-        binding.lifecycleOwner = this
+
+        val application = requireNotNull(this.activity).application
+
+        val asteroidDao = Db.getInstance(application).asteroidDao
+        val pictureOfDayDao = Db.getInstance(application).pictureOfDayDao
+
+        val viewModelFactory = MainViewModelFactory(asteroidDao, pictureOfDayDao)
+        val viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
 
         binding.viewModel = viewModel
+        binding.lifecycleOwner = viewLifecycleOwner
 
         setHasOptionsMenu(true)
 
