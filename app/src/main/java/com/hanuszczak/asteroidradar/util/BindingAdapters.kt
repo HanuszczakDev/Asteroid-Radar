@@ -2,8 +2,10 @@ package com.hanuszczak.asteroidradar.util
 
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
 import com.hanuszczak.asteroidradar.R
+import com.squareup.picasso.Picasso
 
 @BindingAdapter("statusIcon")
 fun bindAsteroidStatusImage(imageView: ImageView, isHazardous: Boolean) {
@@ -39,4 +41,22 @@ fun bindTextViewToKmUnit(textView: TextView, number: Double) {
 fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     val context = textView.context
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
+}
+
+@BindingAdapter("imgUrl", "mediaType")
+fun bindImage(imgView: ImageView, imgUrl: String?, mediaType: String?) {
+    imgUrl?.let {
+        if ("video" == mediaType) {
+            Picasso.with(imgView.context).load(R.drawable.youtube_logo).fit().centerCrop()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image)
+                .into(imgView)
+        } else {
+            val imgUri = imgUrl.toUri().buildUpon().scheme("https").build()
+            Picasso.with(imgView.context).load(imgUri).fit().centerCrop()
+                .placeholder(R.drawable.loading_animation)
+                .error(R.drawable.ic_broken_image)
+                .into(imgView)
+        }
+    }
 }

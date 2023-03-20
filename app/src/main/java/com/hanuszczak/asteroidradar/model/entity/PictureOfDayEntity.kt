@@ -9,7 +9,7 @@ data class PictureOfDayEntity(
     @PrimaryKey
     val id: Long = 0L,
     @ColumnInfo(name = "media_type")
-    val mediaType: String,
-    val title: String,
-    val url: String
+    val mediaType: String = "",
+    val title: String = "",
+    val url: String = ""
 )
