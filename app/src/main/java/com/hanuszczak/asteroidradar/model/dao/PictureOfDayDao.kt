@@ -1,14 +1,12 @@
 package com.hanuszczak.asteroidradar.model.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.hanuszczak.asteroidradar.model.entity.PictureOfDayEntity
 
 @Dao
 interface PictureOfDayDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insert(pictureOfDay: PictureOfDayEntity)
 
     @Update
@@ -16,4 +14,7 @@ interface PictureOfDayDao {
 
     @Delete
     suspend fun delete(pictureOfDay: PictureOfDayEntity)
+
+    @Query("SELECT * FROM picture_of_day ORDER BY id DESC LIMIT 1")
+    fun getLastPictureOfDay(): LiveData<PictureOfDayEntity>
 }

@@ -1,4 +1,4 @@
-package com.hanuszczak.asteroidradar.model.data
+package com.hanuszczak.asteroidradar.model.domain
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

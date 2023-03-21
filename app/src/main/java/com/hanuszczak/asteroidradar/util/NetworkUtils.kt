@@ -1,15 +1,15 @@
 package com.hanuszczak.asteroidradar.util
 
-import com.hanuszczak.asteroidradar.model.data.Asteroid
+import com.hanuszczak.asteroidradar.model.dto.AsteroidDto
 import org.json.JSONObject
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
+fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<AsteroidDto> {
     val nearEarthObjectsJson = jsonResult.getJSONObject("near_earth_objects")
 
-    val asteroidList = ArrayList<Asteroid>()
+    val asteroidDtoList = ArrayList<AsteroidDto>()
 
     val nextSevenDaysFormattedDates = getNextSevenDaysFormattedDates()
     for (formattedDate in nextSevenDaysFormattedDates) {
@@ -33,14 +33,14 @@ fun parseAsteroidsJsonResult(jsonResult: JSONObject): ArrayList<Asteroid> {
                 val isPotentiallyHazardous = asteroidJson
                     .getBoolean("is_potentially_hazardous_asteroid")
 
-                val asteroid = Asteroid(id, codename, formattedDate, absoluteMagnitude,
+                val asteroidDto = AsteroidDto(id, codename, formattedDate, absoluteMagnitude,
                     estimatedDiameter, relativeVelocity, distanceFromEarth, isPotentiallyHazardous)
-                asteroidList.add(asteroid)
+                asteroidDtoList.add(asteroidDto)
             }
         }
     }
 
-    return asteroidList
+    return asteroidDtoList
 }
 
 private fun getNextSevenDaysFormattedDates(): ArrayList<String> {
