@@ -1,6 +1,6 @@
 package com.hanuszczak.asteroidradar.model.repository
 
-import com.hanuszczak.asteroidradar.model.dto.PictureDtoContainer
+import com.hanuszczak.asteroidradar.model.dto.PictureOfDayDto
 import com.hanuszczak.asteroidradar.util.Constants
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -20,7 +20,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ApiService {
     @GET("planetary/apod")
-    suspend fun getPicture(@Query("api_key") apiKey: String): PictureDtoContainer
+    suspend fun getPicture(@Query("api_key") apiKey: String): PictureOfDayDto
 }
 
 object NasaApi {

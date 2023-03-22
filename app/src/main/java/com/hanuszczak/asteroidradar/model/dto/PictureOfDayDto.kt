@@ -14,7 +14,7 @@ data class PictureOfDayDto(
     @Json(name = "media_type")
     val mediaType: String,
     val title: String,
-    val url: String,
+    val url: String
 )
 
 //fun PictureDtoContainer.asDomainModel(): PictureOfDay {
@@ -26,7 +26,7 @@ data class PictureOfDayDto(
 //    )
 //}
 
-fun PictureDtoContainer.asDatabaseModel(): PictureOfDayEntity {
+fun pictureAsDatabaseModel(pictureDto: PictureOfDayDto): PictureOfDayEntity {
     return PictureOfDayEntity(
         mediaType = pictureDto.mediaType,
         title = pictureDto.title,
