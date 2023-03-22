@@ -13,7 +13,7 @@ class ApiRepository (private val db: Db) {
 
     val picture: LiveData<PictureOfDay> = Transformations
         .map(db.pictureOfDayDao.getLastPictureOfDay()) {
-            it.asDomainModel(it)
+            it?.asDomainModel(it)
         }
 
     suspend fun getPictureFromApi() {

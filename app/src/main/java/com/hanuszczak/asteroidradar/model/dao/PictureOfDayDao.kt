@@ -16,5 +16,5 @@ interface PictureOfDayDao {
     suspend fun delete(pictureOfDay: PictureOfDayEntity)
 
     @Query("SELECT * FROM picture_of_day ORDER BY id DESC LIMIT 1")
-    fun getLastPictureOfDay(): LiveData<PictureOfDayEntity>
+    fun getLastPictureOfDay(): LiveData<PictureOfDayEntity?>
 }

@@ -8,7 +8,7 @@ import com.hanuszczak.asteroidradar.model.domain.PictureOfDay
 @Entity(tableName = "picture_of_day")
 data class PictureOfDayEntity(
     @PrimaryKey(autoGenerate = true)
-    val id: Long = 0L,
+    val id: Long = 0,
     @ColumnInfo(name = "media_type")
     val mediaType: String = "",
     val title: String = "",
