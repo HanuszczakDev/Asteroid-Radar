@@ -1,19 +1,20 @@
 package com.hanuszczak.asteroidradar.model.dao
 
-import androidx.room.Dao
-import androidx.room.Delete
-import androidx.room.Insert
-import androidx.room.Update
+import androidx.lifecycle.LiveData
+import androidx.room.*
 import com.hanuszczak.asteroidradar.model.entity.AsteroidEntity
 
 @Dao
 interface AsteroidDao{
-    @Insert
-    suspend fun insert(asteroid: AsteroidEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAll(AsteroidsArray: Array<AsteroidEntity>)
 
     @Update
     suspend fun update(asteroid: AsteroidEntity)
 
     @Delete
     suspend fun delete(asteroid: AsteroidEntity)
+
+    @Query("SELECT * FROM asteroid ORDER BY id DESC")
+    fun getAll(): LiveData<List<AsteroidEntity>>
 }

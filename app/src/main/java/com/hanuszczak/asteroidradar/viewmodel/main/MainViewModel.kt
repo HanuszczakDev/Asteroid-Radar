@@ -21,10 +21,15 @@ class MainViewModel(
     private val repository = ApiRepository(database)
 
     init {
-        viewModelScope.launch { repository.getPictureFromApi() }
+        viewModelScope.launch {
+            repository.getPictureFromApi()
+            repository.getAsteroidsFromApi()
+        }
     }
 
     val pictureOfDay = repository.picture
+
+    val asteroids = repository.asteroids
 
 //    private fun getPicture() {
 //        viewModelScope.launch {

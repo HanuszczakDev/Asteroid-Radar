@@ -1,7 +1,5 @@
 package com.hanuszczak.asteroidradar.model.dto
 
-import androidx.room.PrimaryKey
-import com.hanuszczak.asteroidradar.model.domain.PictureOfDay
 import com.hanuszczak.asteroidradar.model.entity.PictureOfDayEntity
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
