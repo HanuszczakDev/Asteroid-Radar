@@ -15,15 +15,6 @@ data class PictureOfDayDto(
     val url: String
 )
 
-//fun PictureDtoContainer.asDomainModel(): PictureOfDay {
-//    return PictureOfDay(
-//        id = 0,
-//        mediaType = pictureDto.mediaType,
-//        title = pictureDto.title,
-//        url = pictureDto.url
-//    )
-//}
-
 fun pictureAsDatabaseModel(pictureDto: PictureOfDayDto): PictureOfDayEntity {
     return PictureOfDayEntity(
         mediaType = pictureDto.mediaType,
