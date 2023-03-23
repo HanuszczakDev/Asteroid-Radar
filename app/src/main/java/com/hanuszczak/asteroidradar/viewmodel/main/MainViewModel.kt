@@ -1,6 +1,7 @@
 package com.hanuszczak.asteroidradar.viewmodel.main
 
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.*
 import com.hanuszczak.asteroidradar.model.Db
 import com.hanuszczak.asteroidradar.model.domain.Asteroid
@@ -19,8 +20,12 @@ class MainViewModel(
 
     init {
         viewModelScope.launch {
-            repository.getPictureFromApi()
-            repository.getAsteroidsFromApi()
+            try {
+                repository.getPictureFromApi()
+                repository.getAsteroidsFromApi()
+            } catch (e: java.lang.Exception) {
+                Log.e("MainViewModel", "exception in init block: ${e.localizedMessage}")
+            }
         }
     }
 
