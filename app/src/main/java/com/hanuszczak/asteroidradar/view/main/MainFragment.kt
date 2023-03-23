@@ -2,7 +2,10 @@ package com.hanuszczak.asteroidradar.view.main
 
 import android.os.Bundle
 import android.view.*
+import androidx.core.view.MenuHost
+import androidx.core.view.MenuProvider
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.hanuszczak.asteroidradar.R
@@ -10,8 +13,9 @@ import com.hanuszczak.asteroidradar.databinding.FragmentMainBinding
 import com.hanuszczak.asteroidradar.viewmodel.adapter.AsteroidAdapter
 import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModel
 import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModelFactory
+import com.hanuszczak.asteroidradar.viewmodel.main.OptionMenu
 
-class MainFragment : Fragment() {
+class MainFragment : Fragment(), MenuProvider {
 
     private val viewModel: MainViewModel by lazy {
         val activity = requireNotNull(this.activity)
@@ -46,18 +50,31 @@ class MainFragment : Fragment() {
             }
         }
 
-        setHasOptionsMenu(true)
+        val menuHost: MenuHost = requireActivity()
+        menuHost.addMenuProvider(this, viewLifecycleOwner, Lifecycle.State.RESUMED)
 
         return binding.root
 
     }
 
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.main_overflow_menu, menu)
-        super.onCreateOptionsMenu(menu, inflater)
+    override fun onCreateMenu(menu: Menu, menuInflater: MenuInflater) {
+        menuInflater.inflate(R.menu.main_overflow_menu, menu)
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    override fun onMenuItemSelected(menuItem: MenuItem): Boolean {
+        viewModel.optionMenu.value = (
+            when (menuItem.itemId) {
+                R.id.show_all_menu -> {
+                    OptionMenu.SHOW_ALL
+                }
+                R.id.show_today_menu -> {
+                    OptionMenu.SHOW_TODAY
+                }
+                else -> {
+                    OptionMenu.SHOW_WEEK
+                }
+            }
+        )
         return true
     }
 }

@@ -13,6 +13,7 @@
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
         <item name="toolbarStyle">@style/ToolBarStyle</item>
         <!-- Customize your theme here. -->
+        <item name="android:textColorSecondary">@color/white</item>
     </style>
 
     <style name="ToolBarStyle" parent="Widget.AppCompat.Toolbar">

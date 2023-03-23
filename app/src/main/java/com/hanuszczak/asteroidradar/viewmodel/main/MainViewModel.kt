@@ -8,6 +8,8 @@ import com.hanuszczak.asteroidradar.model.domain.Asteroid
 import com.hanuszczak.asteroidradar.model.repository.ApiRepository
 import kotlinx.coroutines.launch
 
+enum class OptionMenu { SHOW_ALL, SHOW_TODAY, SHOW_WEEK }
+
 class MainViewModel(
     application: Application
 ) : AndroidViewModel(application) {
@@ -31,7 +33,15 @@ class MainViewModel(
 
     val pictureOfDay = repository.picture
 
-    val asteroids = repository.asteroids
+    var optionMenu = MutableLiveData(OptionMenu.SHOW_WEEK)
+
+    var asteroids: LiveData<List<Asteroid>?> = Transformations.switchMap(optionMenu) {
+        when(it) {
+            OptionMenu.SHOW_ALL -> repository.allAsteroids
+            OptionMenu.SHOW_TODAY -> repository.asteroidOfToday
+            else -> repository.asteroidsOfWeek
+        }
+    }
 
     fun onAsteroidClicked(asteroid: Asteroid) {
         _navigateToAsteroid.value = asteroid

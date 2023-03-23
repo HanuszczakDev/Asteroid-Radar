@@ -23,10 +23,25 @@ class ApiRepository (private val db: Db) {
             it?.asDomainModel(it)
         }
 
-    val asteroids: LiveData<List<Asteroid>> = Transformations
-        .map(db.asteroidDao.getAll(currentDate(), onwardDate())) {
-        it.asDomainModel()
-    }
+//    val asteroids: LiveData<List<Asteroid>> = Transformations
+//        .map(db.asteroidDao.getAll(currentDate(), onwardDate())) {
+//        it.asDomainModel()
+//    }
+
+    val allAsteroids: LiveData<List<Asteroid>> = Transformations
+        .map(db.asteroidDao.getAll()) {
+            it.asDomainModel()
+        }
+
+    val asteroidsOfWeek: LiveData<List<Asteroid>> = Transformations
+        .map(db.asteroidDao.getWeek(currentDate(), onwardDate())) {
+            it.asDomainModel()
+        }
+
+    val asteroidOfToday: LiveData<List<Asteroid>> = Transformations
+        .map(db.asteroidDao.getToday(currentDate())) {
+            it.asDomainModel()
+        }
 
     suspend fun getPictureFromApi() {
         withContext(Dispatchers.IO) {
