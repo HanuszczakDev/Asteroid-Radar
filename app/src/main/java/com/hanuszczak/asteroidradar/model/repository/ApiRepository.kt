@@ -13,6 +13,8 @@ import com.hanuszczak.asteroidradar.util.parseAsteroidsJsonResult
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import org.json.JSONObject
+import java.text.SimpleDateFormat
+import java.util.*
 
 class ApiRepository (private val db: Db) {
 
@@ -22,7 +24,7 @@ class ApiRepository (private val db: Db) {
         }
 
     val asteroids: LiveData<List<Asteroid>> = Transformations
-        .map(db.asteroidDao.getAll()) {
+        .map(db.asteroidDao.getAll(currentDate(), onwardDate())) {
         it.asDomainModel()
     }
 
@@ -36,10 +38,19 @@ class ApiRepository (private val db: Db) {
     suspend fun getAsteroidsFromApi() {
         withContext(Dispatchers.IO) {
             val asteroidsResponse = NasaApi.retrofitService.getAsteroids(
-                "2023-03-22", "2023-03-22", Constants.API_KEY)
+                currentDate(), onwardDate(), Constants.API_KEY)
             val jsonObject = JSONObject(asteroidsResponse)
             val parsedAsteroidList = parseAsteroidsJsonResult(jsonObject)
             db.asteroidDao.insertAll(asteroidsAsDatabaseModel(parsedAsteroidList))
         }
+    }
+
+    private fun currentDate(): String = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
+        .format(Calendar.getInstance().time)
+
+    private fun onwardDate(): String {
+        val calendar = Calendar.getInstance()
+        calendar.add(Calendar.DATE, Constants.DEFAULT_END_DATE_DAYS)
+        return SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT).format(calendar.time)
     }
 }

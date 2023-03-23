@@ -15,6 +15,6 @@ interface AsteroidDao{
     @Delete
     suspend fun delete(asteroid: AsteroidEntity)
 
-    @Query("SELECT * FROM asteroid ORDER BY id DESC")
-    fun getAll(): LiveData<List<AsteroidEntity>>
+    @Query("SELECT * FROM asteroid WHERE close_approach_date BETWEEN :currentDate and :endDate ORDER BY close_approach_date ASC")
+    fun getAll(currentDate: String, endDate: String): LiveData<List<AsteroidEntity>>
 }
