@@ -11,17 +11,11 @@
             type="com.hanuszczak.asteroidradar.model.domain.Asteroid" />
     </data>
 
-    <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        app:cardCornerRadius="2dp"
-        app:cardElevation="2dp">
-
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:orientation="horizontal"
+            android:layout_marginTop="8dp"
             android:baselineAligned="false">
 
             <LinearLayout
@@ -35,6 +29,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="18sp"
                     android:text="@{asteroid.codename}"
+                    android:textColor="@color/white"
                     tools:text="Asteroid name" />
 
                 <TextView
@@ -42,6 +37,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:text="@{asteroid.closeApproachDate}"
+                    android:textColor="@color/white"
                     tools:text="2020-02-02" />
 
             </LinearLayout>
@@ -57,14 +53,11 @@
                     android:id="@+id/asteroid_img_status"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:tint="@color/black"
                     app:statusIcon="@{asteroid.potentiallyHazardous}"
                     tools:src="@drawable/ic_status_normal" />
 
             </LinearLayout>
 
         </LinearLayout>
-
-    </androidx.cardview.widget.CardView>
 
 </layout>
