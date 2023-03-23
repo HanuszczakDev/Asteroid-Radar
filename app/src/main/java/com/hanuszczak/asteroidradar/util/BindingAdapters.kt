@@ -43,8 +43,9 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
 }
 
-@BindingAdapter("imgUrl", "mediaType")
-fun bindImage(imgView: ImageView, imgUrl: String?, mediaType: String?) {
+@BindingAdapter("imgUrl", "mediaType", "imgDescription")
+fun bindImage(imgView: ImageView, imgUrl: String?, mediaType: String?, imgDescription: String?) {
+    imgView.contentDescription = imgDescription
     imgUrl?.let {
         if ("video" == mediaType) {
             Picasso.with(imgView.context).load(R.drawable.youtube_logo).fit().centerCrop()

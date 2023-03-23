@@ -19,9 +19,16 @@ class DetailFragment : Fragment() {
 
         binding.asteroid = asteroid
 
+        binding.helpButton.contentDescription = resources.getString(R.string.astronomica_unit_explanation)
         binding.helpButton.setOnClickListener {
             displayAstronomicalUnitExplanationDialog()
         }
+
+        binding.activityMainImageOfTheDay.contentDescription =
+            when (asteroid.isPotentiallyHazardous) {
+                true -> resources.getString(R.string.potentially_hazardous_asteroid_image)
+                false -> resources.getString(R.string.not_hazardous_asteroid_image)
+            }
 
         return binding.root
     }
