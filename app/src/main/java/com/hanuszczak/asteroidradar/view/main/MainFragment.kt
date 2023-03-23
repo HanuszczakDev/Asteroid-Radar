@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.hanuszczak.asteroidradar.R
 import com.hanuszczak.asteroidradar.databinding.FragmentMainBinding
 import com.hanuszczak.asteroidradar.viewmodel.adapter.AsteroidAdapter
@@ -25,8 +26,8 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
 
-        val adapter = AsteroidAdapter { asteroidId ->
-            viewModel.onAsteroidClicked(asteroidId)
+        val adapter = AsteroidAdapter {
+            viewModel.onAsteroidClicked(it)
         }
 
         binding.asteroidRecycler.adapter = adapter
@@ -37,9 +38,18 @@ class MainFragment : Fragment() {
             }
         }
 
+        viewModel.navigateToAsteroid.observe(viewLifecycleOwner) { asteroid ->
+            asteroid?.let {
+                val action = MainFragmentDirections.actionShowDetail(asteroid)
+                this.findNavController().navigate(action)
+                viewModel.onAsteroidNavigated()
+            }
+        }
+
         setHasOptionsMenu(true)
 
         return binding.root
+
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

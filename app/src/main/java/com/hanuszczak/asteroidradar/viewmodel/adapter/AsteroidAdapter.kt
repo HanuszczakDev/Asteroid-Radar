@@ -8,7 +8,7 @@ import com.hanuszczak.asteroidradar.databinding.AsteroidItemBinding
 import com.hanuszczak.asteroidradar.model.domain.Asteroid
 import com.hanuszczak.asteroidradar.util.AsteroidDiffItemCallback
 
-class AsteroidAdapter(val clickListener: (asteroidId: Long) -> Unit)
+class AsteroidAdapter(val clickListener: (asteroid: Asteroid) -> Unit)
     : ListAdapter<Asteroid, AsteroidAdapter.AsteroidViewHolder>(AsteroidDiffItemCallback()) {
 
     override fun onCreateViewHolder(
@@ -32,9 +32,9 @@ class AsteroidAdapter(val clickListener: (asteroidId: Long) -> Unit)
             }
         }
 
-        fun bind(item: Asteroid, clickListener: (asteroidId: Long) -> Unit) {
+        fun bind(item: Asteroid, clickListener: (asteroid: Asteroid) -> Unit) {
             binding.asteroid = item
-            binding.root.setOnClickListener { clickListener(item.id) }
+            binding.root.setOnClickListener { clickListener(item) }
         }
     }
 }
