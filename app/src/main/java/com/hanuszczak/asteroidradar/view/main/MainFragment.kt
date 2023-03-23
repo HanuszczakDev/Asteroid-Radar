@@ -21,14 +21,6 @@ class MainFragment : Fragment() {
                               savedInstanceState: Bundle?): View {
         val binding = FragmentMainBinding.inflate(inflater)
 
-//        val application = requireNotNull(this.activity).application
-
-//        val asteroidDao = Db.getInstance(application).asteroidDao
-//        val pictureOfDayDao = Db.getInstance(application).pictureOfDayDao
-
-//        val viewModelFactory = MainViewModelFactory(application)
-//        val viewModel = ViewModelProvider(this, viewModelFactory)[MainViewModel::class.java]
-
         binding.lifecycleOwner = viewLifecycleOwner
 
         binding.viewModel = viewModel
