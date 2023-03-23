@@ -6,7 +6,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.hanuszczak.asteroidradar.R
 import com.hanuszczak.asteroidradar.databinding.FragmentMainBinding
-import com.hanuszczak.asteroidradar.model.Db
+import com.hanuszczak.asteroidradar.viewmodel.adapter.AsteroidAdapter
 import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModel
 import com.hanuszczak.asteroidradar.viewmodel.main.MainViewModelFactory
 
@@ -33,6 +33,17 @@ class MainFragment : Fragment() {
 
         binding.viewModel = viewModel
 
+        val adapter = AsteroidAdapter { asteroidId ->
+            viewModel.onAsteroidClicked(asteroidId)
+        }
+
+        binding.asteroidRecycler.adapter = adapter
+
+        viewModel.asteroids.observe(viewLifecycleOwner) {
+            it?.let {
+                adapter.submitList(it)
+            }
+        }
 
         setHasOptionsMenu(true)
 
