@@ -23,18 +23,13 @@ class ApiRepository (private val db: Db) {
             it?.asDomainModel(it)
         }
 
-//    val asteroids: LiveData<List<Asteroid>> = Transformations
-//        .map(db.asteroidDao.getAll(currentDate(), onwardDate())) {
-//        it.asDomainModel()
-//    }
-
     val allAsteroids: LiveData<List<Asteroid>> = Transformations
-        .map(db.asteroidDao.getAll()) {
+        .map(db.asteroidDao.getAll(currentDate())) {
             it.asDomainModel()
         }
 
     val asteroidsOfWeek: LiveData<List<Asteroid>> = Transformations
-        .map(db.asteroidDao.getWeek(currentDate(), onwardDate())) {
+        .map(db.asteroidDao.getWeek(onwardDate(Constants.ONE_DAY), onwardDate(Constants.SEVEN_DAYS))) {
             it.asDomainModel()
         }
 
@@ -50,10 +45,10 @@ class ApiRepository (private val db: Db) {
         }
     }
 
-    suspend fun getAsteroidsFromApi() {
+    suspend fun getAsteroidsFromApi(plusDays: Int = 0) {
         withContext(Dispatchers.IO) {
             val asteroidsResponse = NasaApi.retrofitService.getAsteroids(
-                currentDate(), onwardDate(), Constants.API_KEY)
+                onwardDate(plusDays), onwardDate(Constants.SEVEN_DAYS), Constants.API_KEY)
             val jsonObject = JSONObject(asteroidsResponse)
             val parsedAsteroidList = parseAsteroidsJsonResult(jsonObject)
             db.asteroidDao.insertAll(asteroidsAsDatabaseModel(parsedAsteroidList))
@@ -63,9 +58,9 @@ class ApiRepository (private val db: Db) {
     private fun currentDate(): String = SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT)
         .format(Calendar.getInstance().time)
 
-    private fun onwardDate(): String {
+    private fun onwardDate(plusDays: Int): String {
         val calendar = Calendar.getInstance()
-        calendar.add(Calendar.DATE, Constants.DEFAULT_END_DATE_DAYS)
+        calendar.add(Calendar.DATE, plusDays)
         return SimpleDateFormat(Constants.API_QUERY_DATE_FORMAT).format(calendar.time)
     }
 }

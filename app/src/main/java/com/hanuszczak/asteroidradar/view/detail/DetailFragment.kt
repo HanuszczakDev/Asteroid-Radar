@@ -19,7 +19,6 @@ class DetailFragment : Fragment() {
 
         binding.asteroid = asteroid
 
-        binding.helpButton.contentDescription = resources.getString(R.string.astronomica_unit_explanation)
         binding.helpButton.setOnClickListener {
             displayAstronomicalUnitExplanationDialog()
         }

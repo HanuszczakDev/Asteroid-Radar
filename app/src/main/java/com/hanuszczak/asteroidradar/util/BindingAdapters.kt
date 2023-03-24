@@ -43,9 +43,10 @@ fun bindTextViewToDisplayVelocity(textView: TextView, number: Double) {
     textView.text = String.format(context.getString(R.string.km_s_unit_format), number)
 }
 
-@BindingAdapter("imgUrl", "mediaType", "imgDescription")
-fun bindImage(imgView: ImageView, imgUrl: String?, mediaType: String?, imgDescription: String?) {
-    imgView.contentDescription = imgDescription
+@BindingAdapter("imgUrl", "mediaType", "imgDescription", "imgDescriptionNotShowingYet")
+fun bindImage(imgView: ImageView, imgUrl: String?, mediaType: String?, imgDescription: String?, imgDescriptionNotShowingYet: String?) {
+    //Before set image to the ImageView I use @string/this_is_nasa_s_picture_of_day_showing_nothing_yet value
+    imgView.contentDescription = imgDescriptionNotShowingYet
     imgUrl?.let {
         if ("video" == mediaType) {
             Picasso.with(imgView.context).load(R.drawable.youtube_logo).fit().centerCrop()
@@ -59,5 +60,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?, mediaType: String?, imgDescri
                 .error(R.drawable.ic_broken_image)
                 .into(imgView)
         }
+        //After set image to the ImageView I use @string/nasa_picture_of_day_content_description_format value
+        imgView.contentDescription = imgDescription
     }
 }

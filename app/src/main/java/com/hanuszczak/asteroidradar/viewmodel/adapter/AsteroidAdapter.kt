@@ -1,9 +1,11 @@
 package com.hanuszczak.asteroidradar.viewmodel.adapter
 
+import android.provider.Settings.Global.getString
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.hanuszczak.asteroidradar.R
 import com.hanuszczak.asteroidradar.databinding.AsteroidItemBinding
 import com.hanuszczak.asteroidradar.model.domain.Asteroid
 import com.hanuszczak.asteroidradar.util.AsteroidDiffItemCallback
@@ -34,6 +36,11 @@ class AsteroidAdapter(val clickListener: (asteroid: Asteroid) -> Unit)
 
         fun bind(item: Asteroid, clickListener: (asteroid: Asteroid) -> Unit) {
             binding.asteroid = item
+            binding.asteroidImgStatus.contentDescription =
+                when (item.isPotentiallyHazardous) {
+                    true -> binding.asteroidImgStatus.context.getString(R.string.potentially_hazardous_asteroid_image)
+                    false -> binding.asteroidImgStatus.context.getString(R.string.not_hazardous_asteroid_image)
+                }
             binding.root.setOnClickListener { clickListener(item) }
         }
     }
