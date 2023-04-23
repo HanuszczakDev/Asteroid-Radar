@@ -38,7 +38,7 @@ The first step is to get an API Key from NASA.
 Got to the following URL - https://api.nasa.gov/ and generate API Key
 
 Put it in the Constant
-```sh
+```
 const val API_KEY = "<NASA_API_KEY>"
 ```
 
