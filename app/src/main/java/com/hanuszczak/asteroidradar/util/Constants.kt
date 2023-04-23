@@ -5,5 +5,5 @@ object Constants {
     const val SEVEN_DAYS = 7
     const val ONE_DAY = 1
     const val BASE_URL = "https://api.nasa.gov/"
-    const val API_KEY = "0CR51QdIK9znPl7l9db8L4TTx5FYRrVUeyJMFo2H"
+    const val API_KEY = "XXX"
 }
