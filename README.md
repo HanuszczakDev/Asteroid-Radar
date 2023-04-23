@@ -46,6 +46,5 @@ const val API_KEY = "<NASA_API_KEY>"
 
 The resulting output of the project are two screens: a Main screen with a list of all the detected asteroids and a Details screen that is going to display the data of that asteroid once it´s selected in the Main screen list. The main screen will also show the NASA image of the day.
 
-![Options](images/Options.png)
-
-![Detail Screen](images/DetailScreen.gif)
+| ![Options](images/Options.png) | ![Detail Screen](images/DetailScreen.gif) |
+| ------ | ------ |
