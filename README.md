@@ -37,7 +37,7 @@ Asteroid Radar is an app to view the asteroids detected by NASA that pass near E
 The first step is to get an API Key from NASA.
 Got to the following URL - https://api.nasa.gov/ and generate API Key
 
-Put it in the Constant
+- Put your API KEY it in Constants object
 ```
 const val API_KEY = "<NASA_API_KEY>"
 ```
